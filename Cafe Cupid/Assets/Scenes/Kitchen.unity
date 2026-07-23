@@ -1609,8 +1609,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handle: {fileID: 1038489278}
   interiorDoor: {fileID: 1333641203}
-  ingredients: []
-  organizers: {fileID: 0}
+  ingredients:
+  - {fileID: 204547989}
+  - {fileID: 1056756437}
+  - {fileID: 1728280837}
+  - {fileID: 1920432570}
+  organizers: {fileID: 1123008221}
 --- !u!1 &824213910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,7 +2143,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1038489279}
   - component: {fileID: 1038489281}
-  - component: {fileID: 1038489282}
   - component: {fileID: 1038489283}
   m_Layer: 0
   m_Name: Handle
@@ -2218,25 +2221,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1038489282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038489278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d9d6b18c0ccac44b4869cde425aad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interiorDoor: {fileID: 1333641203}
-  ingredients:
-  - {fileID: 1056756437}
-  - {fileID: 1728280837}
-  - {fileID: 1920432570}
-  - {fileID: 204547989}
-  organizers: {fileID: 1123008221}
 --- !u!61 &1038489283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2463,8 +2447,8 @@ Transform:
   m_GameObject: {fileID: 1167159261}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.232032, y: -2.4000556, z: 0}
-  m_LocalScale: {x: 1, y: 13.728659, z: 1}
+  m_LocalPosition: {x: -12.74, y: -2.4000556, z: 0}
+  m_LocalScale: {x: 0.078573, y: 13.728659, z: 9.173297}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2011550858}
@@ -3040,7 +3024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1333641204}
   - component: {fileID: 1333641205}
-  - component: {fileID: 1333641206}
   - component: {fileID: 1333641207}
   m_Layer: 0
   m_Name: Door(interior)
@@ -3119,25 +3102,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1333641206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333641203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495c9b363ac58f145b3420861637a5cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handle: {fileID: 1038489278}
-  ingredients:
-  - {fileID: 1056756437}
-  - {fileID: 1728280837}
-  - {fileID: 1920432570}
-  - {fileID: 204547989}
-  organizers: {fileID: 1123008221}
 --- !u!61 &1333641207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4705,6 +4669,7 @@ MonoBehaviour:
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
+  fridgeScriptReference: {fileID: 791521393}
 --- !u!1 &2113997387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,11 +4728,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.343622
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4792,7 +4757,7 @@ Transform:
   m_GameObject: {fileID: 2113997387}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.569529, y: -1.0390829, z: -2.6535985}
+  m_LocalPosition: {x: 6.17, y: -2.4215305, z: -9.661626}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
