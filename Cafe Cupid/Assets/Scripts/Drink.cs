@@ -19,6 +19,7 @@ public class Drink : MonoBehaviour
     [SerializeField] private bool isBitter;
     [SerializeField] private bool isDisappointing;
     private string drinkName;
+    private List<string> recipe; 
     private List<string> drinkMenu;
 
     //"parameterized constructor" 
@@ -32,12 +33,15 @@ public class Drink : MonoBehaviour
             case 1:
                 drinkName = "Caramel Macchiato";
                 drinkType = CupType.WarmMug;
+                recipe = new List<string> { "1 xpresso", "2 caramel", "1 milk" }; 
                 break;
 
             case 2:
                 drinkName = "Raspberry Frappacino";
                 drinkType = CupType.ColdGlass;
+                recipe = new List<string> { "1 rasp", "2 milk", "1 ice", "2 raspSyrup" }; 
                 break;
+
             default:
                 throw new Exception("Valid drink number was not given");
         }

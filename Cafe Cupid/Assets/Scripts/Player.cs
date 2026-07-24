@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float speed;
     [SerializeField] LayerMask defaultLayer;
-    [SerializeField] Fridge fridgeScriptReference; 
+    [SerializeField] Fridge fridgeScriptReference;
+    //[SerializeField] XMachine xScriptReference;
+    [SerializeField] Kitchen kitchenReference; 
 
     private Vector2 position;
     private Vector2 velocity; 
@@ -50,6 +52,10 @@ public class Player : MonoBehaviour
             case "Door(interior)":
                 fridgeScriptReference.CloseDoor(); 
                 break;
+
+            case "LButton":
+                Debug.Log(kitchenReference.Light()); 
+                break; 
         }
     }
 

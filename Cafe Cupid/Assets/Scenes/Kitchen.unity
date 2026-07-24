@@ -851,6 +851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791fe0f5fe95b4349a1f0f056fb68a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightButton: {fileID: 696125000}
+  normButton: {fileID: 11228461}
+  strongButton: {fileID: 394197272}
 --- !u!4 &420167966
 Transform:
   m_ObjectHideFlags: 0
@@ -4670,6 +4673,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   fridgeScriptReference: {fileID: 791521393}
+  xScriptReference: {fileID: 0}
+  kitchenReference: {fileID: 0}
 --- !u!1 &2113997387
 GameObject:
   m_ObjectHideFlags: 0
