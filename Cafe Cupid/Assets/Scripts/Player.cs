@@ -8,13 +8,21 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] LayerMask defaultLayer;
     [SerializeField] Fridge fridgeScriptReference;
-    //[SerializeField] XMachine xScriptReference;
-    [SerializeField] Kitchen kitchenReference; 
+    [SerializeField] XMachine xScriptReference;
+    [SerializeField] Kitchen kitchenReference;
+    [SerializeField] Hand handReference; 
 
     private Vector2 position;
     private Vector2 velocity; 
     private Vector2 direction;
-    private Mouse mouse; 
+    private Mouse mouse;
+    private Drink currentCup;
+    private bool isHandEmpty;
+
+    private void Start()
+    {
+        isHandEmpty = true; 
+    }
 
     private void FixedUpdate()
     {
@@ -43,9 +51,17 @@ public class Player : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         
         if (!rayHit.collider) return;  //no collider found 
+        GameObject clickedObject = rayHit.collider.gameObject;
 
-        switch(rayHit.collider.gameObject.name)
+        switch (clickedObject.name)
         {
+            case "Mug":
+            case "Glass":
+                currentCup = clickedObject.AddComponent<Drink>();
+                Debug.Log("a cup was clicked"); 
+                isHandEmpty = false;
+                handReference.HoldCup(clickedObject); 
+                break; 
             case "Handle":
                 fridgeScriptReference.Handle(); 
                 break;
@@ -54,9 +70,18 @@ public class Player : MonoBehaviour
                 break;
 
             case "LButton":
-                Debug.Log(kitchenReference.Light()); 
+                currentCup.recipe.Add(xScriptReference.Light());
+                Debug.Log(currentCup.recipe); 
+                break;
+
+            default:
                 break; 
         }
+    }
+
+    private void IngredientSelected()
+    {
+
     }
 
 }

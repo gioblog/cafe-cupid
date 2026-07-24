@@ -19,7 +19,7 @@ public class Drink : MonoBehaviour
     [SerializeField] private bool isBitter;
     [SerializeField] private bool isDisappointing;
     private string drinkName;
-    private List<string> recipe; 
+    public List<string> recipe; 
     private List<string> drinkMenu;
 
     //"parameterized constructor" 
