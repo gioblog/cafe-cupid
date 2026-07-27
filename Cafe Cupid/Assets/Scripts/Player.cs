@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
         {
             case "Mug":
             case "Glass":
-                currentCup = clickedObject.AddComponent<Drink>();
+                currentCup = clickedObject.GetComponent<Drink>();
                 Debug.Log("a cup was clicked"); 
                 isHandEmpty = false;
                 handReference.HoldCup(clickedObject); 
@@ -70,8 +70,18 @@ public class Player : MonoBehaviour
                 break;
 
             case "LButton":
+                //play animation 
                 currentCup.recipe.Add(xScriptReference.Light());
-                Debug.Log(currentCup.recipe); 
+                break;
+
+            case "NButton":
+                //play animation
+                currentCup.recipe.Add(xScriptReference.Normal());
+                break;
+
+            case "SButton":
+                //play animation 
+                currentCup.recipe.Add(xScriptReference.Strong());
                 break;
 
             default:
