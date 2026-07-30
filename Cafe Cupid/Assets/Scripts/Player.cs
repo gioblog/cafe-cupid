@@ -12,12 +12,15 @@ public class Player : MonoBehaviour
     [SerializeField] Kitchen kitchenReference;
     [SerializeField] Hand handReference; 
 
+
     private Vector2 position;
     private Vector2 velocity; 
     private Vector2 direction;
     private Mouse mouse;
-    private Drink currentCup;
+    private DrinkOrder currentCup;
     private bool isHandEmpty;
+
+    Drinks baseDrinks; 
 
     private void Start()
     {
@@ -57,14 +60,27 @@ public class Player : MonoBehaviour
         {
             case "Mug":
             case "Glass":
-                currentCup = clickedObject.GetComponent<Drink>();
+                currentCup = clickedObject.GetComponent<DrinkOrder>();
                 Debug.Log("a cup was clicked"); 
                 isHandEmpty = false;
                 handReference.HoldCup(clickedObject); 
                 break; 
+
             case "Handle":
                 fridgeScriptReference.Handle(); 
                 break;
+
+            case "Milk":
+                //animation 
+                currentCup.recipe.Add("1 milk"); 
+                break;
+
+            case "Caramel":
+                //animation 
+                currentCup.recipe.Add("1 caramel"); 
+                //caramel.Add()
+                break; 
+
             case "Door(interior)":
                 fridgeScriptReference.CloseDoor(); 
                 break;
@@ -84,14 +100,13 @@ public class Player : MonoBehaviour
                 currentCup.recipe.Add(xScriptReference.Strong());
                 break;
 
+            case "ServeButton":
+                currentCup.EvalCup(); 
+                break; 
+
             default:
                 break; 
         }
-    }
-
-    private void IngredientSelected()
-    {
-
     }
 
 }

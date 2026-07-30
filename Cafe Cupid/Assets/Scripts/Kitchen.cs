@@ -4,31 +4,14 @@ using System.Collections.Generic;
 
 public class Kitchen : MonoBehaviour
 {
-    private Drink currentCup;
-    private Drink caramelMac;
-    private Drink raspFrap; 
-    private bool isHandEmpty;
-    private GameObject objectHolding;
-    private List<Drink> drinkMenu;
+    private Drinks caramelMac;
+    private List<string> caramelRecipe = new List<string> { "1 xpresso", "2 caramel",  "1 milk" };
 
-    [SerializeField] GameObject lightButton;
-    [SerializeField] GameObject normButton;
-    [SerializeField] GameObject strongButton;
-    private double xShot;
-
+    public List<Drinks> menu;  
     private void Awake()
     {
-        //drinks available on the menu 
-        //caramelMac = caramelMac.Initialize(1);
-        //raspFrap.Initialize(2); 
-        //drinkMenu = new List<Drink> { caramelMac, raspFrap }; 
+        caramelMac = new Drinks("caramel macciato", CupType.WarmMug, caramelRecipe);
+        menu.Add(caramelMac); 
     }
-    public string Light()
-    {
-        xShot = .5;
-        return $"{xShot} xpresso";
-    }
-
-
 
 }
