@@ -10,6 +10,9 @@ public class Fridge : MonoBehaviour
 
     private SpriteRenderer[] organizersSpriteComponents;
  
+    /// <summary>
+    /// Opens the fridge when the handle is clicked 
+    /// </summary>
     public void Handle()
     {
         Debug.Log("collision entered with " + handle.name);
@@ -30,6 +33,9 @@ public class Fridge : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Closes the fridge when the door is clicked on 
+    /// </summary>
     public void CloseDoor()
     {
         Debug.Log("collision entered with " + interiorDoor.name);

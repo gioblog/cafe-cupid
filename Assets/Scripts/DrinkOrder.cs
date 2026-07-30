@@ -42,6 +42,10 @@ public class DrinkOrder : MonoBehaviour
     //    }
     //}
 
+    /// <summary>
+    /// Based on all possible drinks in the menu, identifies what drink the 
+    /// player made by comparing reciepes 
+    /// </summary>
     public void EvalCup()
     {
        //comparing two lists of strings where order does not matter 
