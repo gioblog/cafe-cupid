@@ -41,6 +41,11 @@ public class DialogueGraphImporter : ScriptedImporter
             {
                 ProcessDialogueNode(dialogueNode, runtimeNode, nodeIDMap); 
             }
+            else if (iNode is ChoiceNode choiceNode)
+            {
+                ProcessChoiceNode(choiceNode, runtimeNode, nodeIDMap); 
+            }
+                runtimeGraph.allNodes.Add(runtimeNode); 
         }
 
         //make inspector field for dialogue graph
@@ -52,7 +57,7 @@ public class DialogueGraphImporter : ScriptedImporter
         Dictionary<INode, string> nodeIDMap)
     {
         runtimeNode.speakerName = GetPortValue<string>(node.GetInputPortByName("Speaker"));
-        runtimeNode.dialogueText = GetPortValue<string>(node.GetInputPortByName("Dialogue"));
+        runtimeNode.dialogueText = GetPortValue<string>(node.GetInputPortByName("Dialogue")); 
 
         //creates the chain to let the game know how to go
         //from one piece of dialogue to the next 
@@ -62,6 +67,40 @@ public class DialogueGraphImporter : ScriptedImporter
             runtimeNode.nextNodeID = nodeIDMap[nextNodePort.GetNode()]; 
         }
 
+    }
+
+    private void ProcessChoiceNode(ChoiceNode node, RuntimeDialogueNode runtimeNode, Dictionary<INode, string> nodeIDMap)
+    {
+        runtimeNode.speakerName = GetPortValue<string>(node.GetInputPortByName("Speaker"));
+        runtimeNode.dialogueText = GetPortValue<string>(node.GetInputPortByName("Dialogue"));
+
+        var allInputPorts = node.GetInputPorts().ToList();
+
+        Debug.Log($"Input ports ({allInputPorts.Count}):");
+        foreach (var p in allInputPorts)
+        {
+            Debug.Log($"  Input: {p.Name}");
+
+        }
+
+        var choiceOutputPorts = node.GetOutputPorts().Where(p => p.Name.StartsWith("Dialogue ")); 
+        foreach(var outputPort in choiceOutputPorts)
+        { 
+            var index = outputPort.Name.Substring("Dialogue Choice #".Length);
+            var textPort = node.GetInputPortByName($"Dialogue Choice Text #{index}");
+
+            var choiceData = new ChoiceData
+            {
+                choiceText = GetPortValue<string>(textPort),
+                //ternary operator thats checks whether or not the output port is connected and 
+                //gives instructions on what to do if the condition is true or false 
+                // (condition) ? (if true) : (if false) 
+                destinationNodeID = outputPort.FirstConnectedPort != null ?
+                nodeIDMap[outputPort.FirstConnectedPort.GetNode()] : null
+            };   
+
+            runtimeNode.choices.Add(choiceData); 
+        }
     }
 
     /// <summary>

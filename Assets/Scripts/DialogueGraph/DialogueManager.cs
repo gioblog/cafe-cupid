@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI speakerText;
     public TextMeshProUGUI dialogueText;
+
+    [Header("Choice Button UI")]
+    public Button choiceButtonPrefab;
+    public Transform choiceButtonContainer; 
 
     private Dictionary<string, RuntimeDialogueNode> nodeLookup = new Dictionary<string, RuntimeDialogueNode>();
     private RuntimeDialogueNode currentNode;
@@ -35,9 +40,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        //checks for either mouse or controller input 
-        if(Mouse.current.leftButton.wasPressedThisFrame && currentNode != null || 
-            Gamepad.current.buttonWest.wasPressedThisFrame && currentNode != null)
+        //last condition checks to make sure that there isn't a dialogue button selection occuring 
+        if (IsPressed() && currentNode != null && currentNode.choices.Count == 0)
         {
             if (!string.IsNullOrEmpty(currentNode.nextNodeID))
             {
@@ -50,6 +54,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays dialogue to UI 
+    /// </summary>
+    /// <param name="nodeID"></param>
     private void ShowNode(string nodeID)
     {
         //when the node id is not found in the dictionary 
@@ -63,12 +71,68 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         speakerText.SetText(currentNode.speakerName);
         dialogueText.SetText(currentNode.dialogueText); 
+
+        foreach(Transform child in choiceButtonContainer)
+        {
+            Destroy(child.gameObject); 
+        }
+
+        //displays choices if they are present for the user  
+        if(currentNode.choices.Count > 0)
+        {
+            foreach(var choice in currentNode.choices)
+            {
+                Button button = Instantiate(choiceButtonPrefab, choiceButtonContainer);
+                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>(); 
+                if(buttonText != null)
+                {
+                    buttonText.text = choice.choiceText;
+                }
+
+                //setup button's onClick event
+                if(button != null)
+                {
+                    button.onClick.AddListener(() =>
+                    {
+                       if(!string.IsNullOrEmpty(choice.destinationNodeID))
+                       {
+                            ShowNode(choice.destinationNodeID); 
+                       }
+                       else
+                       {
+                            EndDialogue(); //string is null 
+                       }
+                    });   
+                }
+            }
+        }
     }
 
+    /// <summary>
+    /// Ends dialogue by returning nessary variables to default state
+    /// </summary>
     private void EndDialogue()
     {
         dialoguePanel.SetActive(false);
-        currentNode = null; 
+        currentNode = null;
+
+        //just in case 
+        foreach (Transform child in choiceButtonContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }  
+    
+    /// <summary>
+    /// Checks what tool is actively being used 
+    /// </summary>
+    /// <returns></returns>
+    private bool IsPressed()
+    {
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) return true;
+        if (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame) return true;
+
+        return false; 
     }
 }
 
