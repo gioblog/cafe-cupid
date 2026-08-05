@@ -3,6 +3,6 @@ To make running the local cafe a little more exciting, you, the cafe owner, deci
 
 This project was started on July 17th, 2026 as part of my participation in the Hack Your Summer program.  
 
-# About The Developer 
+## About The Developer 
 Giovanna Nelson | BS Game Design & Development Student at Rochester Institute of Technology (minors in Software Engineering & Marketing) 
 (LinkedIn)[https://www.linkedin.com/in/giovanna-saywon-nelson/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BFeP%2FMsTgTHmZwuRtaiXf4Q%3D%3D]
