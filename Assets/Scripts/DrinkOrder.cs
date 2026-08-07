@@ -16,8 +16,8 @@ public class DrinkOrder : MonoBehaviour
     [SerializeField] private bool isSweet;
     [SerializeField] private bool isBitter;
     [SerializeField] private bool isDisappointing;
-    [SerializeField] public List<string> recipe;
-    [SerializeField] public List<Ingredient> theRecipe;
+    [SerializeField] public List<Ingredient> recipe;
+    //[SerializeField] public List<Ingredient> theRecipe;
 
 
     //bool IsSweet { get { return IsSweet; } }

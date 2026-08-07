@@ -71,13 +71,13 @@ public class Player : MonoBehaviour
                 break;
 
             case "Milk":
-                //animation 
-                currentCup.recipe.Add("1 milk"); 
-                break;
+                //milk animation 
+                //currentCup.recipe.Add("1 milk"); 
+                //break;
 
             case "Caramel":
-                //animation 
-                currentCup.recipe.Add("1 caramel"); 
+                // caramel animation 
+                kitchenReference.AddIngredient(clickedObject.name, currentCup);  
                 //caramel.Add()
                 break; 
 
@@ -87,17 +87,18 @@ public class Player : MonoBehaviour
 
             case "LButton":
                 //play animation 
-                currentCup.recipe.Add(xScriptReference.Light());
+                kitchenReference.AddIngredient(clickedObject.name, currentCup);
                 break;
 
             case "NButton":
                 //play animation
-                currentCup.recipe.Add(xScriptReference.Normal());
+                kitchenReference.AddIngredient(clickedObject.name, currentCup);
                 break;
 
             case "SButton":
                 //play animation 
-                currentCup.recipe.Add(xScriptReference.Strong());
+                kitchenReference.AddIngredient(clickedObject.name, currentCup);
+                kitchenReference.AddIngredient(clickedObject.name, currentCup);
                 break;
 
             case "ServeButton":
